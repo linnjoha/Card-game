@@ -51,6 +51,8 @@ let card = document.querySelector(".card");
 let span = document.querySelectorAll("span");
 let b = document.querySelectorAll("b");
 let cardCounter = document.querySelector("#card-counter");
+let guessing= document.getElementById('guessing')
+
 
 let pointHolder = 0; // if rätt gissat ++
 let guesses = 3; // if felsvar --
@@ -61,7 +63,7 @@ console.log(randomCard); // Programstart
 
 const updateElements = () => {
   const valueMap = { 11: "Kn", 12: "Q", 13: "K", 14: "A" };
-  points.innerHTML = "poäng:" + pointHolder;
+  points.innerHTML = "Poäng:" + pointHolder;
   guessesEl.innerHTML = "Gissningar kvar:" + guesses;
   cardCounter.innerHTML = cardsLeft + " kort kvar";
   card.style.color = randomCard.color;
@@ -77,8 +79,10 @@ const cardGuessing = (boolean) => {
     console.log(nextCard);
     if (boolean) {
       pointHolder++;
+      guessing.innerText='RÄTT GISSAT!'
     } else {
       guesses--;
+      guessing.innerText='FEL GISSAT!'
     }
     randomCard = nextCard;
     nextCard = randomCardFromCardDeck();
@@ -86,6 +90,9 @@ const cardGuessing = (boolean) => {
     console.log(pointHolder, guesses, cardsLeft);
   }
   updateElements();
+  if (guesses===0){
+    guessing.innerText='SPELET SLUT! Du fick: '+ pointHolder + ' poäng';
+  }
 };
 
 let guessingLower = document.querySelector("#lower");
